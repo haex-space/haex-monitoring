@@ -13,7 +13,7 @@
       "type": "row"
     },
     {
-      "datasource": { "type": "prometheus", "uid": "PBFA97CFB590B2093" },
+      "datasource": { "type": "prometheus", "uid": "prometheus" },
       "fieldConfig": {
         "defaults": {
           "thresholds": {
@@ -48,7 +48,7 @@
       ]
     },
     {
-      "datasource": { "type": "prometheus", "uid": "PBFA97CFB590B2093" },
+      "datasource": { "type": "prometheus", "uid": "prometheus" },
       "fieldConfig": {
         "defaults": {
           "thresholds": {
@@ -83,7 +83,7 @@
       ]
     },
     {
-      "datasource": { "type": "prometheus", "uid": "PBFA97CFB590B2093" },
+      "datasource": { "type": "prometheus", "uid": "prometheus" },
       "fieldConfig": {
         "defaults": {
           "thresholds": {
@@ -118,11 +118,9 @@
       ]
     },
     {
-      "datasource": { "type": "prometheus", "uid": "PBFA97CFB590B2093" },
+      "datasource": { "type": "prometheus", "uid": "prometheus" },
       "fieldConfig": {
-        "defaults": {
-          "unit": "s"
-        }
+        "defaults": { "unit": "s" }
       },
       "gridPos": { "h": 5, "w": 6, "x": 18, "y": 1 },
       "id": 4,
@@ -142,7 +140,7 @@
       ]
     },
     {
-      "datasource": { "type": "prometheus", "uid": "PBFA97CFB590B2093" },
+      "datasource": { "type": "prometheus", "uid": "prometheus" },
       "fieldConfig": {
         "defaults": { "unit": "percent", "custom": { "fillOpacity": 20, "lineWidth": 2 } }
       },
@@ -159,7 +157,7 @@
       ]
     },
     {
-      "datasource": { "type": "prometheus", "uid": "PBFA97CFB590B2093" },
+      "datasource": { "type": "prometheus", "uid": "prometheus" },
       "fieldConfig": {
         "defaults": { "unit": "bytes", "custom": { "fillOpacity": 20, "lineWidth": 2 } }
       },
@@ -181,7 +179,7 @@
       ]
     },
     {
-      "datasource": { "type": "prometheus", "uid": "PBFA97CFB590B2093" },
+      "datasource": { "type": "prometheus", "uid": "prometheus" },
       "fieldConfig": {
         "defaults": { "unit": "Bps", "custom": { "fillOpacity": 20, "lineWidth": 2 } }
       },
@@ -203,7 +201,7 @@
       ]
     },
     {
-      "datasource": { "type": "prometheus", "uid": "PBFA97CFB590B2093" },
+      "datasource": { "type": "prometheus", "uid": "prometheus" },
       "fieldConfig": {
         "defaults": { "unit": "Bps", "custom": { "fillOpacity": 20, "lineWidth": 2 } }
       },
@@ -232,7 +230,7 @@
       "type": "row"
     },
     {
-      "datasource": { "type": "prometheus", "uid": "PBFA97CFB590B2093" },
+      "datasource": { "type": "prometheus", "uid": "prometheus" },
       "fieldConfig": {
         "defaults": {
           "mappings": [
@@ -262,21 +260,15 @@
       "type": "stat",
       "targets": [
         {
-          "expr": "container_last_seen{name=~\".+\"} - time() > -60",
+          "expr": "container_last_seen{name=~\"$container\"} - time() > -60",
           "legendFormat": "{{ name }}",
           "refId": "A",
           "instant": true
         }
-      ],
-      "transformations": [
-        {
-          "id": "sortBy",
-          "options": { "fields": {}, "sort": [{ "field": "Field", "order": "asc" }] }
-        }
       ]
     },
     {
-      "datasource": { "type": "prometheus", "uid": "PBFA97CFB590B2093" },
+      "datasource": { "type": "prometheus", "uid": "prometheus" },
       "fieldConfig": {
         "defaults": { "unit": "percent", "custom": { "fillOpacity": 20, "lineWidth": 1 } }
       },
@@ -286,14 +278,14 @@
       "type": "timeseries",
       "targets": [
         {
-          "expr": "sum(rate(container_cpu_usage_seconds_total{name=~\".+\"}[5m])) by (name) * 100",
+          "expr": "sum(rate(container_cpu_usage_seconds_total{name=~\"$container\"}[5m])) by (name) * 100",
           "legendFormat": "{{ name }}",
           "refId": "A"
         }
       ]
     },
     {
-      "datasource": { "type": "prometheus", "uid": "PBFA97CFB590B2093" },
+      "datasource": { "type": "prometheus", "uid": "prometheus" },
       "fieldConfig": {
         "defaults": { "unit": "bytes", "custom": { "fillOpacity": 20, "lineWidth": 1 } }
       },
@@ -303,14 +295,14 @@
       "type": "timeseries",
       "targets": [
         {
-          "expr": "container_memory_usage_bytes{name=~\".+\"}",
+          "expr": "container_memory_usage_bytes{name=~\"$container\"}",
           "legendFormat": "{{ name }}",
           "refId": "A"
         }
       ]
     },
     {
-      "datasource": { "type": "prometheus", "uid": "PBFA97CFB590B2093" },
+      "datasource": { "type": "prometheus", "uid": "prometheus" },
       "fieldConfig": {
         "defaults": { "unit": "Bps", "custom": { "fillOpacity": 20, "lineWidth": 1 } }
       },
@@ -320,14 +312,14 @@
       "type": "timeseries",
       "targets": [
         {
-          "expr": "sum(irate(container_network_receive_bytes_total{name=~\".+\"}[5m])) by (name)",
+          "expr": "sum(irate(container_network_receive_bytes_total{name=~\"$container\"}[5m])) by (name)",
           "legendFormat": "{{ name }}",
           "refId": "A"
         }
       ]
     },
     {
-      "datasource": { "type": "prometheus", "uid": "PBFA97CFB590B2093" },
+      "datasource": { "type": "prometheus", "uid": "prometheus" },
       "fieldConfig": {
         "defaults": { "unit": "Bps", "custom": { "fillOpacity": 20, "lineWidth": 1 } }
       },
@@ -337,14 +329,14 @@
       "type": "timeseries",
       "targets": [
         {
-          "expr": "sum(irate(container_network_transmit_bytes_total{name=~\".+\"}[5m])) by (name)",
+          "expr": "sum(irate(container_network_transmit_bytes_total{name=~\"$container\"}[5m])) by (name)",
           "legendFormat": "{{ name }}",
           "refId": "A"
         }
       ]
     },
     {
-      "datasource": { "type": "prometheus", "uid": "PBFA97CFB590B2093" },
+      "datasource": { "type": "prometheus", "uid": "prometheus" },
       "fieldConfig": {
         "defaults": { "unit": "short", "custom": { "fillOpacity": 20, "lineWidth": 1 } }
       },
@@ -354,7 +346,7 @@
       "type": "timeseries",
       "targets": [
         {
-          "expr": "changes(container_last_seen{name=~\".+\"}[1h])",
+          "expr": "changes(container_last_seen{name=~\"$container\"}[1h])",
           "legendFormat": "{{ name }}",
           "refId": "A"
         }
@@ -368,7 +360,7 @@
       "type": "row"
     },
     {
-      "datasource": { "type": "prometheus", "uid": "PBFA97CFB590B2093" },
+      "datasource": { "type": "prometheus", "uid": "prometheus" },
       "fieldConfig": {
         "defaults": { "unit": "reqps", "custom": { "fillOpacity": 20, "lineWidth": 2 } }
       },
@@ -385,7 +377,7 @@
       ]
     },
     {
-      "datasource": { "type": "prometheus", "uid": "PBFA97CFB590B2093" },
+      "datasource": { "type": "prometheus", "uid": "prometheus" },
       "fieldConfig": {
         "defaults": { "unit": "reqps", "custom": { "fillOpacity": 20, "lineWidth": 2 } }
       },
@@ -402,7 +394,7 @@
       ]
     },
     {
-      "datasource": { "type": "prometheus", "uid": "PBFA97CFB590B2093" },
+      "datasource": { "type": "prometheus", "uid": "prometheus" },
       "fieldConfig": {
         "defaults": { "unit": "s", "custom": { "fillOpacity": 20, "lineWidth": 2 } }
       },
@@ -422,11 +414,28 @@
   "refresh": "30s",
   "schemaVersion": 39,
   "tags": ["haex-space"],
-  "templating": { "list": [] },
+  "templating": {
+    "list": [
+      {
+        "allValue": ".+",
+        "current": { "selected": true, "text": ["All"], "value": ["$__all"] },
+        "datasource": { "type": "prometheus", "uid": "prometheus" },
+        "definition": "label_values(container_last_seen{name=~\".+\"}, name)",
+        "includeAll": true,
+        "multi": true,
+        "name": "container",
+        "label": "Container",
+        "query": { "query": "label_values(container_last_seen{name=~\".+\"}, name)", "refId": "StandardVariableQuery" },
+        "refresh": 2,
+        "sort": 1,
+        "type": "query"
+      }
+    ]
+  },
   "time": { "from": "now-6h", "to": "now" },
   "timepicker": {},
   "timezone": "browser",
   "title": "haex.space",
   "uid": "haex-space-overview",
-  "version": 1
+  "version": 2
 }
